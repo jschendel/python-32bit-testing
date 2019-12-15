@@ -3,15 +3,21 @@ trigger:
 
 jobs:
 - job: 'Windows'
-
   pool:
     vmImage: 'windows-latest'
+  timeoutInMinutes: 20
+  strategy:
+    matrix:
+      "Python 3.6, 32 bit":
+        python.version: '3.6.8'
+        python.pkg: 'pythonx86'
+      "Python 3.7, 32 bit":
+        python.version: '3.7.5'
+        python.pkg: 'pythonx86'
+      "Python 3.8, 32 bit":
+        python.version: '3.8.0'
+        python.pkg: 'pythonx86'
 
   steps:
-  - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '3.6' 
-        addToPath: true 
-        architecture: 'x86'
-
-  - script: python --version
+  - task: NuGetToolInstaller@0
+  - script: python --version 
