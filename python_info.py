@@ -1,9 +1,13 @@
+import platform
 import struct
 import sys
 
-print('#' * 100)
-print('python:', sys.version)
-print('version_info:', sys.version_info)
-print('bits:', struct.calcsize('P') * 8)
-print('executable:', sys.executable)
-print('#' * 100)
+# display this prior to running python_script.py
+print(
+    "#" * 100,
+    f"python: {'.'.join(map(str, sys.version_info))}",
+    f"os: {platform.uname().system.lower()}",
+    f"bits: {struct.calcsize('P') * 8}",
+    "#" * 100,
+    sep="\n"
+)
