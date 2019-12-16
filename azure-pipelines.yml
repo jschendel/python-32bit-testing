@@ -41,7 +41,7 @@ jobs:
   - powershell: |
       Write-Host "$PWD\pyinstall\${PYTHON_PKG}"
       Write-Host "$Env:Path"
-      Write-Host "##vso[task.prependpath]$env:$PWD\pyinstall\${PYTHON_PKG}"
+      Write-Host "##vso[task.prependpath]$PWD\pyinstall\${PYTHON_PKG}"
       Write-Host "$Env:Path"
     displayName: 'Setup Path'
   - bash: ci/all_windows.sh
