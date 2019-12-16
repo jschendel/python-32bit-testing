@@ -40,10 +40,8 @@ jobs:
   - task: NuGetToolInstaller@0
   - powershell: Write-Host "##vso[task.prependpath]$PWD\pyinstall\${PYTHON_PKG}\tools"
     displayName: 'Setup Path'
-  - bash: |
-      echo "Creating Environment"
-      ci/all_windows.sh
+  - bash: ci/all_windows.sh
     displayName: 'Create Environment'
-  - bash: python python_info.py
+  - script: python python_info.py
     displayName: 'Run Python Scripts'
     condition: always()
