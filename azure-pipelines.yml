@@ -29,6 +29,8 @@ jobs:
         python.version: '3.6'
       "Python 3.7, 32 bit":
         python.version: '3.7'
+      "Python 3.8, 32 bit":
+        python.version: '3.8'
   steps:
   - script: |
       echo '##vso[task.prependpath]$(HOME)/miniconda3/bin'
@@ -37,4 +39,5 @@ jobs:
     displayName: 'Setup environment'
   - script: |
       source activate test-env
+      which python
       ./test.sh

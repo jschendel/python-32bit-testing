@@ -1,9 +1,20 @@
 import numbers
 
-for i in range(-2, 2):
-    val = 2**61 + i
-    val_str = f"2**61 {'+' if i >= 0 else '-'} {abs(i)}"
-    print(val_str, val, hash(val))
+# for i in range(-2, 2):
+#     val = 2**61 + i
+#     val_str = f"2**61 {'+' if i >= 0 else '-'} {abs(i)}"
+#     print(val_str, val, hash(val))
+
+low = 0
+high = 2 ** 61
+while high - low > 1:
+    mid = (high + low) // 2
+    if mid == hash(mid):
+        low = mid
+    else:
+        high = mid
+
+print(low, high)
 
 
 # -----------------------------------------------------------------------------
