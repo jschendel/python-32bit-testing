@@ -39,7 +39,8 @@ jobs:
   steps:
   - task: NuGetToolInstaller@0
   - bash: |
-      echo $(HOME)
+      echo $PWD/pyinstall/${PYTHON_PKG}/tools
+      echo '##vso[task.prependpath]$PWD/pyinstall/${PYTHON_PKG}/tools'
       echo "Creating Environment"
       ci/all_windows.sh
     displayName: 'Setup Environment'

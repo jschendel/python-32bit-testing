@@ -15,6 +15,5 @@ nuget install "${PYTHON_PKG}" -Version "${PYTHON_VERSION}" \
 
 pydir="$PWD/pyinstall/${PYTHON_PKG}"
 export PATH="${pydir}/tools:${pydir}/tools/scripts:$PATH"
-echo which python
-python --version
+echo "${pydir}/tools"
 sh ./test.sh
