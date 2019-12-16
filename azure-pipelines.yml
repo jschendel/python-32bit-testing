@@ -2,6 +2,26 @@ trigger:
 - master
 
 jobs:
+- job: 'Linux'
+  pool:
+    vmImage: 'ubuntu-16.04'
+  strategy:
+    matrix:
+      "Python 3.6, 32 bit":
+        python.version: '3.6'
+      "Python 3.7, 32 bit":
+        python.version: '3.7'
+  steps:
+  - script: |
+      echo '##vso[task.prependpath]$(HOME)/miniconda3/bin'
+      echo "Creating Environment"
+      ci/env_linux.sh
+    displayName: 'Setup Environment'
+  - script: |
+      source activate test-env
+      ./test.sh
+    displayName: 'Run Python Scripts'
+
 - job: 'Windows'
   pool:
     vmImage: 'windows-latest'
@@ -19,25 +39,7 @@ jobs:
   steps:
   - task: NuGetToolInstaller@0
   - bash: ci/all_windows.sh
-
-- job: 'Linux'
-  pool:
-    vmImage: 'ubuntu-16.04'
-  strategy:
-    matrix:
-      "Python 3.6, 32 bit":
-        python.version: '3.6'
-      "Python 3.7, 32 bit":
-        python.version: '3.7'
-      "Python 3.8, 32 bit":
-        python.version: '3.8'
-  steps:
-  - script: |
-      echo '##vso[task.prependpath]$(HOME)/miniconda3/bin'
-      echo "Creating Environment"
-      ci/env_linux.sh
-    displayName: 'Setup environment'
-  - script: |
-      source activate test-env
-      which python
-      ./test.sh
+    displayName: 'Setup Environment'
+  - bash: python python_info.py
+    displayName: 'Run Python Scripts'
+    condition: always()

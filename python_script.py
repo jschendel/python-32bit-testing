@@ -80,8 +80,7 @@ class NAType(C_NAType):
         raise TypeError("boolean value of NA is ambiguous")
 
     def __hash__(self):
-        exp = 61 if True else 31
-        return 2 ** 61 - 1
+        return 2 ** 31 - 1
 
     # Binary arithmetic and comparison ops -> propagate
 

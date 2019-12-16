@@ -36,13 +36,9 @@ echo "conda list (root environment)"
 conda list
 
 # Clean up any left-over from a previous build
-# (note workaround for https://github.com/conda/conda/issues/2679:
-#  `conda env remove` issue)
+# (note workaround for https://github.com/conda/conda/issues/2679: conda env remove` issue)
 conda remove --all -q -y -n test-env
 
 echo
 echo "conda create -q --name test-env python=${PYTHON_VERSION}"
 conda create --name test-env python=${PYTHON_VERSION}
-
-# activate 32-bit compiler
-export CONDA_BUILD=1
