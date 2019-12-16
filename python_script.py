@@ -1,7 +1,9 @@
 import numbers
 
-for x in range(2**61 - 2, 2**61 + 2):
-    print(x, hash(x))
+for i in range(-2, 2):
+    val = 2**61 + i
+    val_str = f"2**61 {'+' if i >= 0 else '-'} {abs(i)}"
+    print(val_str, val, hash(val))
 
 
 # -----------------------------------------------------------------------------
@@ -67,7 +69,7 @@ class NAType(C_NAType):
         raise TypeError("boolean value of NA is ambiguous")
 
     def __hash__(self):
-        return id(self)
+        return 2 ** 61 - 1
 
     # Binary arithmetic and comparison ops -> propagate
 
@@ -160,4 +162,7 @@ class NAType(C_NAType):
 C_NA = NAType()   # C-visible
 NA = C_NA         # Python-visible
 
+print("-" * 50)
+print("2 ** 61 - 1", hash(2 ** 61 - 1))
+print(str(NA), hash(NA))
 print({NA, hash(NA)})
