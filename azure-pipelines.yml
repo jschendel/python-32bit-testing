@@ -19,4 +19,3 @@ jobs:
   steps:
   - task: NuGetToolInstaller@0
   - bash: ci/env_windows.sh && test.sh
-      displayName: Set up environment and run the tests
