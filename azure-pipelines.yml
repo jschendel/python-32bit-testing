@@ -38,11 +38,7 @@ jobs:
         python.pkg: 'pythonx86'
   steps:
   - task: NuGetToolInstaller@0
-  - powershell: |
-      Write-Host "$env:CONDA\Scripts"
-      Write-Host "$PWD:pyinstall\${PYTHON_PKG}\tools"
-      Write-Host "$PWD\pyinstall\${PYTHON_PKG}\tools"
-      Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
+  - powershell: Write-Host "##vso[task.prependpath]$PWD\pyinstall\${PYTHON_PKG}\tools"
     displayName: 'Setup Path'
   - bash: |
       echo "Creating Environment"
