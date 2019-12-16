@@ -13,8 +13,3 @@ nuget install "${PYTHON_PKG}" -Version "${PYTHON_VERSION}" \
 -OutputDirectory "$PWD/pyinstall" -ExcludeVersion \
 -Source "https://api.nuget.org/v3/index.json" \
 -Verbosity detailed -DirectDownload -NonInteractive
-
-pydir="$PWD/pyinstall/${PYTHON_PKG}"
-export PATH="${pydir}/tools:${pydir}/tools/scripts:$PATH"
-echo pydir
-sh ./test.sh

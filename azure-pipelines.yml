@@ -2,44 +2,41 @@ trigger:
 - master
 
 jobs:
-# - job: 'Linux'
-#   pool:
-#     vmImage: 'ubuntu-16.04'
-#   strategy:
-#     matrix:
-#       "Python 3.6, 32 bit":
-#         python.version: '3.6'
-#       "Python 3.7, 32 bit":
-#         python.version: '3.7'
-#   steps:
-#   - script: |
-#       echo '##vso[task.prependpath]$(HOME)/miniconda3/bin'
-#       echo "Creating Environment"
-#       ci/env_linux.sh
-#     displayName: 'Setup Path and Create Environment'
-#   - script: |
-#       source activate test-env
-#       ./test.sh
-#     displayName: 'Run Python Scripts'
+- job: 'Linux'
+  pool:
+    vmImage: 'ubuntu-latest'
+  strategy:
+    matrix:
+      "Python 3.6, 32 bit":
+        python.version: '3.6'
+      "Python 3.7, 32 bit":
+        python.version: '3.7'
+  steps:
+  - script: echo '##vso[task.prependpath]$(HOME)/miniconda3/bin'
+    displayName: 'Add Python to Path'
+  - script: ci/env_linux.sh
+    displayName: 'Create Environment'
+  - script: source activate test-env && ci/run_script.sh
+    displayName: 'Run Python Scripts'
 
 - job: 'Windows'
   pool:
     vmImage: 'windows-latest'
   strategy:
     matrix:
-      # "Python 3.6, 32 bit":
-      #   python.version: '3.6.8'
-      #   python.pkg: 'pythonx86'
+      "Python 3.6, 32 bit":
+        python.version: '3.6.8'
+        python.pkg: 'pythonx86'
       "Python 3.7, 32 bit":
         python.version: '3.7.5'
         python.pkg: 'pythonx86'
-      # "Python 3.8, 32 bit":
-      #   python.version: '3.8.0'
-      #   python.pkg: 'pythonx86'
+      "Python 3.8, 32 bit":
+        python.version: '3.8.0'
+        python.pkg: 'pythonx86'
   steps:
   - task: NuGetToolInstaller@0
   - powershell: Write-Host "##vso[task.prependpath]$PWD\pyinstall\$(python.pkg)\tools"
-    displayName: 'Setup Path'
+    displayName: 'Add Python to Path'
   - bash: ci/env_windows.sh
     displayName: 'Create Environment'
   - bash: ci/run_script.sh
