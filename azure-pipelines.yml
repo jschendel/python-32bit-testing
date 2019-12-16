@@ -22,7 +22,7 @@ jobs:
 
 - job: 'Linux'
   pool:
-    vmImage: 'ubuntu-latest'
+    vmImage: 'ubuntu-16.04'
   strategy:
     matrix:
       "Python 3.6, 32 bit":
