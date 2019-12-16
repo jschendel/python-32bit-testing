@@ -1,20 +1,20 @@
 import numbers
 
-# for i in range(-2, 2):
-#     val = 2**61 + i
-#     val_str = f"2**61 {'+' if i >= 0 else '-'} {abs(i)}"
-#     print(val_str, val, hash(val))
+for i in range(-2, 2):
+    val = 2**31 + i
+    val_str = f"2**31 {'+' if i >= 0 else '-'} {abs(i)}"
+    print(val_str, val, hash(val))
 
-low = 0
-high = 2 ** 61
-while high - low > 1:
-    mid = (high + low) // 2
-    if mid == hash(mid):
-        low = mid
-    else:
-        high = mid
+# low = 0
+# high = 2 ** 61
+# while high - low > 1:
+#     mid = (high + low) // 2
+#     if mid == hash(mid):
+#         low = mid
+#     else:
+#         high = mid
 
-print(low, high)
+# print(low, high)
 
 
 # -----------------------------------------------------------------------------
@@ -80,6 +80,7 @@ class NAType(C_NAType):
         raise TypeError("boolean value of NA is ambiguous")
 
     def __hash__(self):
+        exp = 61 if True else 31
         return 2 ** 61 - 1
 
     # Binary arithmetic and comparison ops -> propagate
@@ -174,6 +175,6 @@ C_NA = NAType()   # C-visible
 NA = C_NA         # Python-visible
 
 print("-" * 50)
-print("2 ** 61 - 1", hash(2 ** 61 - 1))
+print("2 ** 31 - 1", hash(2 ** 31 - 1))
 print(str(NA), hash(NA))
 print({NA, hash(NA)})
