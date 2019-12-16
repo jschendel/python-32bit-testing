@@ -8,7 +8,7 @@
 # pre-installed versions that azure pipelines provides on C:\.
 # Also use -DirectDownload to stop nuget from caching things on C:\.
 nuget install "${PYTHON_PKG}" -Version "${PYTHON_VERSION}" \
--OutputDirectory "$env:NuGet" -ExcludeVersion \
+-OutputDirectory "$env:NuGet/pyinstall" -ExcludeVersion \
 # -OutputDirectory "$PWD/pyinstall" -ExcludeVersion \
 -Source "https://api.nuget.org/v3/index.json" \
 -Verbosity detailed -NonInteractive
@@ -16,6 +16,6 @@ nuget install "${PYTHON_PKG}" -Version "${PYTHON_VERSION}" \
 
 # pydir="$PWD/pyinstall/${PYTHON_PKG}"
 # export PATH="${pydir}/tools:${pydir}/tools/scripts:$PATH"
-pydir="$env:NuGet/${PYTHON_PKG}"
+pydir="$env:NuGet/pyinstall/${PYTHON_PKG}"
 export PATH="${pydir}/tools:${pydir}/tools/scripts:$PATH"
 sh ./test.sh
