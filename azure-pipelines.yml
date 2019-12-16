@@ -16,7 +16,7 @@ jobs:
 #       echo '##vso[task.prependpath]$(HOME)/miniconda3/bin'
 #       echo "Creating Environment"
 #       ci/env_linux.sh
-#     displayName: 'Setup Environment'
+#     displayName: 'Setup Path and Create Environment'
 #   - script: |
 #       source activate test-env
 #       ./test.sh
@@ -38,12 +38,16 @@ jobs:
         python.pkg: 'pythonx86'
   steps:
   - task: NuGetToolInstaller@0
+  - powershell: |
+      Write-Host "$env:CONDA\Scripts"
+      Write-Host "$PWD:pyinstall\${PYTHON_PKG}\tools"
+      Write-Host "$PWD\pyinstall\${PYTHON_PKG}\tools"
+      Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
+    displayName: 'Setup Path'
   - bash: |
-      echo $PWD/pyinstall/${PYTHON_PKG}/tools
-      echo '##vso[task.prependpath]$PWD/pyinstall/${PYTHON_PKG}/tools'
       echo "Creating Environment"
       ci/all_windows.sh
-    displayName: 'Setup Environment'
+    displayName: 'Create Environment'
   - bash: python python_info.py
     displayName: 'Run Python Scripts'
     condition: always()
