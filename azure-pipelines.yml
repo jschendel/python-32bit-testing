@@ -39,9 +39,9 @@ jobs:
   steps:
   - task: NuGetToolInstaller@0
   - powershell: |
-      Write-Host "$home\NuGet"
+      Write-Host "$PWD\pyinstall\${PYTHON_PKG}"
       Write-Host "$Env:Path"
-      Write-Host "##vso[task.prependpath]$home\NuGet"
+      Write-Host "##vso[task.prependpath]$env:$PWD\pyinstall\${PYTHON_PKG}"
       Write-Host "$Env:Path"
     displayName: 'Setup Path'
   - bash: ci/all_windows.sh
