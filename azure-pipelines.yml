@@ -37,4 +37,4 @@ jobs:
 
       pydir="$PWD/pyinstall/${PYTHON_PKG}"
       export PATH="${pydir}/tools:${pydir}/tools/scripts:$PATH"
-  - bash: python -c "import sys, struct; print('#' * 70); print('python:', sys.version); print('version_info:', sys.version_info); print('bits:', struct.calcsize('P') * 8);"
+      python -c "import sys, struct; print('#' * 70); print('python:', sys.version); print('version_info:', sys.version_info); print('bits:', struct.calcsize('P') * 8);"
