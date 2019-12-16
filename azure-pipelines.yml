@@ -2,25 +2,25 @@ trigger:
 - master
 
 jobs:
-- job: 'Linux'
-  pool:
-    vmImage: 'ubuntu-16.04'
-  strategy:
-    matrix:
-      "Python 3.6, 32 bit":
-        python.version: '3.6'
-      "Python 3.7, 32 bit":
-        python.version: '3.7'
-  steps:
-  - script: |
-      echo '##vso[task.prependpath]$(HOME)/miniconda3/bin'
-      echo "Creating Environment"
-      ci/env_linux.sh
-    displayName: 'Setup Environment'
-  - script: |
-      source activate test-env
-      ./test.sh
-    displayName: 'Run Python Scripts'
+# - job: 'Linux'
+#   pool:
+#     vmImage: 'ubuntu-16.04'
+#   strategy:
+#     matrix:
+#       "Python 3.6, 32 bit":
+#         python.version: '3.6'
+#       "Python 3.7, 32 bit":
+#         python.version: '3.7'
+#   steps:
+#   - script: |
+#       echo '##vso[task.prependpath]$(HOME)/miniconda3/bin'
+#       echo "Creating Environment"
+#       ci/env_linux.sh
+#     displayName: 'Setup Environment'
+#   - script: |
+#       source activate test-env
+#       ./test.sh
+#     displayName: 'Run Python Scripts'
 
 - job: 'Windows'
   pool:
@@ -39,8 +39,7 @@ jobs:
   steps:
   - task: NuGetToolInstaller@0
   - bash: |
-      echo '##vso[task.prependpath]$PWD/pyinstall/${PYTHON_PKG}/tools/scripts'
-      echo '##vso[task.prependpath]$PWD/pyinstall/${PYTHON_PKG}/tools'
+      echo $(HOME)
       echo "Creating Environment"
       ci/all_windows.sh
     displayName: 'Setup Environment'
