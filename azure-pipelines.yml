@@ -30,5 +30,11 @@ jobs:
       "Python 3.7, 32 bit":
         python.version: '3.7'
   steps:
-  - bash: ci/env_linux.sh
-  - bash: test.sh
+  - script: |
+      echo '##vso[task.prependpath]$(HOME)/miniconda3/bin'
+      echo "Creating Environment"
+      ci/env_linux.sh
+    displayName: 'Setup environment'
+  - script: |
+      source activate test-env
+      test.sh
