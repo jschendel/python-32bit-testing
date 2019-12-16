@@ -39,8 +39,11 @@ jobs:
   steps:
   - task: NuGetToolInstaller@0
   - powershell: |
+      Write-Host "$Env:Path"
       Write-Host "$env\NuGet\pyinstall"
+      Write-Host "$home\NuGet"
       Write-Host "##vso[task.prependpath]$env\NuGet\pyinstall"
+      Write-Host "$Env:Path"
     displayName: 'Setup Path'
   - bash: ci/all_windows.sh
     displayName: 'Create Environment'
