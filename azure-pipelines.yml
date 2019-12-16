@@ -38,19 +38,9 @@ jobs:
       #   python.pkg: 'pythonx86'
   steps:
   - task: NuGetToolInstaller@0
-  - powershell: |
-      Write-Host "$PWD\pyinstall\$(python.pkg)\tools"
-      Write-Host "$Env:Path"
-      Write-Host "##vso[task.prependpath]$PWD\pyinstall\$(python.pkg)\tools"
-      Write-Host "$Env:Path"
+  - powershell: Write-Host "##vso[task.prependpath]$PWD\pyinstall\$(python.pkg)\tools"
     displayName: 'Setup Path'
-  - powershell: Write-Host "$Env:Path"
   - bash: ci/env_windows.sh
     displayName: 'Create Environment'
-  - script: python python_info.py
-    displayName: 'Run Python Scripts'
-    condition: always()
   - bash: ci/run_script.sh
-    displayName: 'Run Python Scripts 2'
-    condition: always()
-
+    displayName: 'Run Python Scripts'
