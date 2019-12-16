@@ -18,4 +18,4 @@ jobs:
         python.pkg: 'pythonx86'
   steps:
   - task: NuGetToolInstaller@0
-  - bash: ci/env_windows.sh
+  - bash: ci/all_windows.sh
