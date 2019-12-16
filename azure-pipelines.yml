@@ -19,3 +19,15 @@ jobs:
   steps:
   - task: NuGetToolInstaller@0
   - bash: ci/all_windows.sh
+
+# - job: 'Linux'
+#   pool:
+#     vmImage: 'ubuntu-latest'
+#   strategy:
+#     matrix:
+#       "Python 3.6, 32 bit":
+#         python.version: '3.6'
+#       "Python 3.7, 32 bit":
+#         python.version: '3.7'
+#   steps:
+#   - bash: ci/env_windows.sh

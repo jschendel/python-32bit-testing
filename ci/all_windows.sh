@@ -14,5 +14,4 @@ nuget install "${PYTHON_PKG}" -Version "${PYTHON_VERSION}" \
 
 pydir="$PWD/pyinstall/${PYTHON_PKG}"
 export PATH="${pydir}/tools:${pydir}/tools/scripts:$PATH"
-python -c "import sys, struct; print('#' * 70); print('python:', sys.version); print('version_info:', sys.version_info); print('bits:', struct.calcsize('P') * 8);"
 sh ./test.sh
