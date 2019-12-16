@@ -38,7 +38,11 @@ jobs:
         python.pkg: 'pythonx86'
   steps:
   - task: NuGetToolInstaller@0
-  - bash: ci/all_windows.sh
+  - bash: |
+      echo '##vso[task.prependpath]$PWD/pyinstall/${PYTHON_PKG}/tools/scripts'
+      echo '##vso[task.prependpath]$PWD/pyinstall/${PYTHON_PKG}/tools'
+      echo "Creating Environment"
+      ci/all_windows.sh
     displayName: 'Setup Environment'
   - bash: python python_info.py
     displayName: 'Run Python Scripts'
