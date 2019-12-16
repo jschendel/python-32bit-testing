@@ -22,6 +22,26 @@ jobs:
 #       ./test.sh
 #     displayName: 'Run Python Scripts'
 
+
+- job: 'WindowsConda'
+  pool:
+    vmImage: 'windows-latest'
+  strategy:
+    matrix:
+      "Python 3.6, 32 bit":
+        python.version: '3.6'
+      "Python 3.7, 32 bit":
+        python.version: '3.7'
+  steps:
+  - powershell: Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
+    displayName: Add conda to PATH
+  - bash: ci/env_linux.sh
+    displayName: 'Create Environment'
+  - script: |
+      source activate test-env
+      ./test.sh
+    displayName: 'Run Python Scripts'
+
 - job: 'Windows'
   pool:
     vmImage: 'windows-latest'
