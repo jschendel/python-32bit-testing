@@ -27,18 +27,22 @@ jobs:
     vmImage: 'windows-latest'
   strategy:
     matrix:
-      "Python 3.6, 32 bit":
-        python.version: '3.6.8'
-        python.pkg: 'pythonx86'
+      # "Python 3.6, 32 bit":
+      #   python.version: '3.6.8'
+      #   python.pkg: 'pythonx86'
       "Python 3.7, 32 bit":
         python.version: '3.7.5'
         python.pkg: 'pythonx86'
-      "Python 3.8, 32 bit":
-        python.version: '3.8.0'
-        python.pkg: 'pythonx86'
+      # "Python 3.8, 32 bit":
+      #   python.version: '3.8.0'
+      #   python.pkg: 'pythonx86'
   steps:
   - task: NuGetToolInstaller@0
-  - powershell: Write-Host "##vso[task.prependpath]$PWD\pyinstall\${PYTHON_PKG}\tools"
+  - powershell: |
+      Write-Host "$PWD\pyinstall\${PYTHON_PKG}\tools\scripts"
+      Write-Host "##vso[task.prependpath]$PWD\pyinstall\${PYTHON_PKG}\tools\scripts"
+      Write-Host "$PWD\pyinstall\${PYTHON_PKG}\tools"
+      Write-Host "##vso[task.prependpath]$PWD\pyinstall\${PYTHON_PKG}\tools"
     displayName: 'Setup Path'
   - bash: ci/all_windows.sh
     displayName: 'Create Environment'
