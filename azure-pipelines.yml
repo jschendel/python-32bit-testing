@@ -47,7 +47,7 @@ jobs:
   - powershell: Write-Host "$Env:Path"
   - bash: ci/env_windows.sh
     displayName: 'Create Environment'
-  - shell: python python_info.py
+  - script: python python_info.py
     displayName: 'Run Python Scripts'
     condition: always()
   - bash: ci/run_script.sh
